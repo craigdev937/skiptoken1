@@ -12,7 +12,7 @@ export interface IData {
     images: string[]
 };
 
-export interface IProducts {
+export interface IProducts extends IData {
     products: IData[]
 };
 

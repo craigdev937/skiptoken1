@@ -6,17 +6,17 @@ export const Home = () => {
     const [postId, setPostId] = React.useState(1);
     const [postCat, setPostCat] = React.useState("");
 
-    const [getAllProd, { 
+    const [getAllProd, {
         isFetching: isFetchingAllProducts, 
         data: AllProducts 
     }] = TriggerAPI.useLazyAllQuery();
 
-    const [getOneProd, { 
+    const [getOneProd, {
         isFetching: isFetchingOneProd, 
         data: singleProd 
     }] = TriggerAPI.useLazyOneQuery();
 
-    const [getCategory, { 
+    const [getCategory, {
         isFetching: isFetchingCategory, 
         data: prodsCategory 
     }] = TriggerAPI.useLazyProCatQuery();
@@ -29,13 +29,13 @@ export const Home = () => {
         getOneProd(postId);
     };
 
+    const handleCategory = () => {
+        getCategory(postCat);
+    };
+
     const handlePostID = 
     (event: React.ChangeEvent<HTMLInputElement>) => {
         setPostId(Number(event.target.value));
-    };
-
-    const handleCategory = () => {
-        getCategory(postCat);
     };
 
     const handlePostCat = 
@@ -62,6 +62,7 @@ export const Home = () => {
                     />
                 )}
             </aside>
+            <hr />
             <aside>
                 {AllProducts && (
                     <ul>
@@ -148,6 +149,7 @@ export const Home = () => {
                     <ul>
                         {prodsCategory.products.map((product) => (
                             <li key={product.id}>
+                                <img src={product.thumbnail} alt="" />
                                 {product.title}
                                 <h6>Category: {product.category}</h6>
                             </li>
@@ -158,5 +160,7 @@ export const Home = () => {
         </React.Fragment>
     );
 };
+
+
 
 
